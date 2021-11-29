@@ -5,7 +5,7 @@ export default function SearchBar(props) {
     const { handleChangeSearch, search } = props
 
     return (
-        <Form >
+        <Form classsName='SearchBar'>
             <InputGroup className="mb-3">
                 <FormControl
                     onChange={handleChangeSearch}

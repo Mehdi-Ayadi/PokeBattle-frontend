@@ -1,10 +1,19 @@
+@font-face {
+  font-family: 'Pokemon GB';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Pokemon GB'), url('Pokemon\ GB.woff') format('woff');
+  }
+
 .divider {
+  font-family: 'Pokemon GB';
   margin: 2px;
 }
 
 .auth-btn {
+  font-family: 'Pokemon GB';
   padding: 5px 10px;
-  border-radius: 0.5rem !important;
+  border-radius: 0.5rem;
 }
 
 img {
@@ -12,6 +21,7 @@ img {
 }
 
 .formDiv {
+  font-family: 'Pokemon GB';
   padding: 3% 10%;
   margin-top: 25px;
   border-radius: 1rem;
@@ -23,8 +33,12 @@ img {
   min-height: 450px;
   
 }
+.nav {
+  margin: auto;
+}
 
 input {
+  font-family: 'Pokemon GB';
   border: 1px solid teal;
   border-radius: 0.25rem;
   width: auto;
@@ -34,7 +48,8 @@ input {
 }
 
 select {
-  border: 1px solid teal;
+  font-family: 'Pokemon GB';
+  border: 1px solid rgb(223, 83, 40);
   border-radius: 0.25rem;
   width: 250px;
   height: 36px;
@@ -42,6 +57,7 @@ select {
 }
 
 .error {
+  font-family: 'Pokemon GB';
   color: red;
   background: pink;
   border-radius: 5px;
@@ -54,6 +70,7 @@ select {
 }
 
 .option {
+  font-family: 'Pokemon GB';
   color: grey;
   margin-top: 5px;
 }
@@ -63,19 +80,25 @@ select {
 }
 
 .battleListing {
+  font-family: 'Pokemon GB';
   min-height: 89vh;
   margin-top: 25px;
 }
 
 .userCard {
+  font-family: 'Pokemon GB';
   border: 1px solid rgb(161, 161, 161);
   border-radius: 5px;
   text-align: center;
   margin-bottom: 5px;
   font-size: 16px;
 }
-
+.Scroll{
+  background-color: rgb(20, 176, 238);
+}
 .regCard {
+  font-family: 'Pokemon GB';
+  background-color: azure;
   border: 1px solid rgb(161, 161, 161);
   border-radius: 10px;
   padding: 15px;
@@ -93,7 +116,7 @@ select {
   background-size: contain;
   background-position: center;
   width: 100%;
-  height: 466px;
+  height: 500px;
   overflow: hidden;
 }
 
@@ -113,8 +136,8 @@ select {
 
 .hpBar {
   padding: 2.5% 10%;
-  border: 1px solid black;
-  border-radius: 15px;
+  border: 4px solid black;
+  border-radius: 20px;
 }
 
 .userSprite {
@@ -127,12 +150,24 @@ select {
 }
 
 .battleMove {
+  font-family: 'Pokemon GB';
   width: 100%;
   margin-bottom: 15px;
 }
 
+.changePokemon{
+  font-family: 'Pokemon GB';
+  width: auto;
+  align-items: center;
+  min-width: 20%;
+  padding: 5px;
+  background-color: white !important;
+
+}
+
 .message {
-  width: 60%;
+  font-family: 'Pokemon GB';
+  width: 100%;
   min-height: 106px;
 }
 
@@ -144,21 +179,24 @@ select {
 }
 
 .pokemonMove {
-  border: 1px solid rgb(192, 190, 190);
+  font-family: 'Pokemon GB';
+  border: 3px solid rgb(66, 65, 65);
   border-radius: 5px;
   width: 25%;
   text-align: center;
 }
 
 .pokemonMove:hover {
-  cursor: pointer;
+  cursor: crosshair;
 }
 
 .pokemonNickname {
+  font-family: 'Pokemon GB';
   margin: 0;
 }
 
 .moveFont {
+  font-family: 'Pokemon GB';
   width: auto;
   min-width: 20%;
   padding: 5px;

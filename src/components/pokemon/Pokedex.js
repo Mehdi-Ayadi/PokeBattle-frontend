@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import PokemonCard from './PokemonCard';
 import SearchBar from './SearchBar';
+import Scroll from './Scroll';
+
+
 
 export default function Pokedex() {
     const [pokemons, setPokemons] = useState([]);
@@ -45,13 +48,18 @@ export default function Pokedex() {
     
     return (
         <Container className='mt-5'>
-            <Row>
-                <SearchBar handleChangeSearch={handleChangeSearch} search={search} />
-            </Row>
+            <div>
+                <SearchBar 
+                containerStyle = {{ alignItems:'center', justifyContent:'center' }} handleChangeSearch={handleChangeSearch} search={search} />
+            </div>
             <br/>
+            <Scroll>
             <Row className='mb-4'>
+            
                 {renderPokemonCards()}
+                
             </Row>
+            </Scroll>
         </Container>
     )
 }

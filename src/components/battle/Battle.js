@@ -2,9 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import Rival from './Rival';
-import User from './User';
+import User from './User';  
 import BattleMove from './BattleMove';
 import consumer from '../../Cable';
+import Team from '../team/Team';
+
 
 const URL = 'http://localhost:3001/';
 
@@ -17,12 +19,13 @@ export default function Battle(props) {
     const [user, setUser] = useState(null);
     const [rival, setRival] = useState(null);
     const [userActive, setUserActive] = useState({
+        team_id: null,
         nickname: null,
         sprite: null,
         hp: null,
         maxhp: null,
         moves: [],
-        index: 0
+        index: 0,
     });
     const [rivalActive, setRivalActive] = useState({
         sprite: null,
@@ -67,6 +70,15 @@ export default function Battle(props) {
             }
         }
     });
+
+    const allBluePokemon = (data) => {
+        const blueUser= data.users[1];
+        if (currentUserId === blueUser) {
+            const bluePokemons = data.blue_team.pokemons[rivalActive.index];
+            return bluePokemons;
+        }
+
+    }
 
     const winProcedure = (data) => {
         const redUser = data.users[0];
@@ -380,6 +392,26 @@ export default function Battle(props) {
         }
     }
 
+
+    // const handleClickNextPokemon= (pokemonIndex) => {
+    //     fetch(`${URL}fight`, {
+    //         method: 'PATCH',
+    //         headers: {
+    //             'Authorization': `Bearer ${localStorage.token}`,
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify({
+    //             battle: {
+    //                 id: battleId,
+    //                 pokemon_index: pokemonIndex
+    //             }
+    //         })
+    //     })
+    //     .then(resp => resp.json())
+    //     .then(data => console.log(data))
+    // }
+
+
     const handleClickFight = (moveIndex) => {
         fetch(`${URL}fight`, {
             method: 'PATCH',
@@ -401,6 +433,7 @@ export default function Battle(props) {
     const renderMoves = () => {
         return userActive.moves.map((move, index) => <BattleMove key={move.id} moveIndex={index} {...move} handleClickFight={handleClickFight} />)
     }
+
 
     const startBattleMusic = () => {
         audio.current = new Audio('https://vgmdownloads.com/soundtracks/pokemon-original-game-soundtrack/mckmelhq/115%20-%20battle%20%28vs%20trainer%29.mp3')
@@ -435,16 +468,36 @@ export default function Battle(props) {
                     <Col md={8} className="message">
                         <p>{message}</p>
                     </Col>
-                    <Col md={4}>
-                        <Row className="battleMoveList">
+                    <Row md={2} className="battleMoveList">
+                        
                             {turn == currentUserId ? renderMoves() : null}
+                    
+                    </Row>
+                    {/* <Col>
+                        <Row className="ChangePokemon">
+                            <div>
+                            <Col>
+                            *************************************************Remaining Pokemons*************************************************
+                            </Col>
+                            <p>
+                            </p>
+                            <Col>
+                               <Row>
+                                 <div className="teamDiv">
+                                      <Container>
+                                         <Team/>
+                                      </Container>   
+                                </div>
+                              </Row>
+                            </Col>
+                            </div>
                         </Row>
-                    </Col>
+                    </Col> */}
                 </Row>
             </Container>
             </>
             :
-            <Container>
+            <Container className="text-center">
                 Waiting for player to join...
             </Container>
             }

@@ -3,6 +3,7 @@ import { Container, Row, Col, Badge, Button } from 'react-bootstrap';
 import PokemonTeamCard from './PokemonTeamCard';
 import { useHistory } from "react-router-dom";
 
+
 const URL = 'http://localhost:3001/'
 
 export default function TeamCard(team) {
@@ -105,10 +106,9 @@ export default function TeamCard(team) {
             <br/>
             <Row>
                 <Col>
-                <Row>
-
-                    {teamPokemons.length > 0 ? renderTeamPokemons() : <p className="pl-5">There are no pokémon in this team.</p>}
-                </Row>
+                    <Row>
+                        {teamPokemons.length > 0 ? renderTeamPokemons() : <p className="pl-5">There are no pokémon in this team.</p>}
+                    </Row>
                 </Col>
             </Row>
         </Container>

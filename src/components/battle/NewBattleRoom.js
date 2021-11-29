@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import TeamCard from '../team/TeamCard';
-import { Button, Modal } from 'react-bootstrap';
+import { Button, Modal, Row } from 'react-bootstrap';
 
 const URL = 'http://localhost:3001/';
 
@@ -10,6 +10,7 @@ export default function NewBattleRoom(props) {
     const history = useHistory();
     const [show, setShow] = useState(false);
 
+    const [rooms, setRooms] = useState([]);
     const [roomName, setRoomName] = useState('');
     const [teams, setTeams] = useState([]);
     const [selectedTeam, setSelectedTeam] = useState(0);
@@ -38,6 +39,7 @@ export default function NewBattleRoom(props) {
         toJoin ? handleSubmitJoinRoom() : handleSubmitCreateRoom() 
     }
 
+    
     const handleSubmitCreateRoom = () => {
         fetch(`${URL}battles`, {
             method: 'POST',
@@ -55,6 +57,7 @@ export default function NewBattleRoom(props) {
         .then(resp => resp.json())
         .then(data => {
             handleClose();
+            setRooms(...rooms,data);
             history.push({
                 pathname: '/battle',
                 state: {
@@ -64,6 +67,26 @@ export default function NewBattleRoom(props) {
             });
         })
     }
+
+    const handleSubmitDeleteRoom = () => {
+        fetch(`${URL}battles/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${localStorage.token}`
+            },
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            setRooms(data);
+            console.log(data);
+        }) 
+    }
+
+    const handleRemoveItem = (e) => {
+        const rooms = e.target.getAttribute('room_name')
+         setRooms(rooms.filter(rooms => rooms.roomName !== roomName));
+       };
+
 
     const handleSubmitJoinRoom = () => {
         fetch(`${URL}join`, {
@@ -100,15 +123,21 @@ export default function NewBattleRoom(props) {
     const renderTeamOptions = () => {
         return teams.map((team, index) => <option value={index} key={team.id}>{team.name}</option>)
     }
-  
+
+    const refreshPage = () => {
+        window.location.reload(false);
+      }
+
     return (
-      <>
-        
+      <> 
         <Button variant="primary" onClick={handleShow} disabled={status === 'full' ? true : false}>
             {status === 'full' ? 'Room Full' : (toJoin ? 'Join Room' : 'Create Room')}
         </Button>
-    
-  
+        
+        <Button  variant="secondary" name={rooms.roomName} onChange={handleRemoveItem} onClick={() => { handleSubmitDeleteRoom(); refreshPage()}}>
+                        Delete room
+        </Button>
+            
         <Modal show={show} onHide={handleClose} size={'xl'}>
           <Modal.Header closeButton>
             <Modal.Title>{toJoin ? 'Join Room' : 'Create Room'}</Modal.Title>
@@ -137,13 +166,16 @@ export default function NewBattleRoom(props) {
                     <Button variant="secondary" onClick={handleClose}>
                     Close
                     </Button>
+                    
                     <Button variant="primary" type="submit">
                         {status === 'full' ? null : (toJoin ? 'Join Room' : 'Create Room')}
                     </Button>
+                    
+
                 </Modal.Footer>
               </form>
           </Modal.Body>
         </Modal>
       </>
-    );
+    )
   }

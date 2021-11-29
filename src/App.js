@@ -10,6 +10,7 @@ import TeamListings from './components/team/TeamListings';
 import Playground from './components/Playground';
 import Battle from './components/battle/Battle';
 import './App.css';
+import Loading from './components/Loading';
 
 const URL = 'http://localhost:3001/'
 
@@ -52,6 +53,7 @@ function App() {
 
           <Col md={12}>
             <Switch>
+              <Route exact path="/"><Loading/></Route>
               <Route exact path="/"><Home {...currentUser} /> </Route>
               <Route exact path="/pokedex"><Pokedex /></Route>
               <Route exact path="/teams"><TeamListings /></Route>

@@ -46,10 +46,11 @@ export default function PokemonTeamCard(props) {
                         <hr className="divider"/>
                         {showOptions ? 
                         <Container className="text-center p-4">
-                            <Button onClick={handleClickRelease} variant='outline-danger'>Release</Button>
+                            <Button onClick={handleClickRelease} variant='secondary'>Release</Button>
                         </Container>
                         :
-                        <PokemonStats {...pokemon.stats} /> }
+                        <PokemonStats {...pokemon.stats} />
+                         }
                         
                     </Col>
                 </Row>
